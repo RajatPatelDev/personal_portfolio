@@ -1,9 +1,11 @@
-// Add projects here when their live site or source repository is ready.
+// PORTFOLIO SCRIPT — project content, footer year, and mobile navigation.
+// PROJECT DATA: Add a project here when its live site or source repository is ready.
 const projects = [
   // Example:
   // { name: "ServiceOS", type: "SAAS PRODUCT", status: "IN DEVELOPMENT", description: "A field-service platform concept for teams managing jobs, customers and operations.", url: "https://github.com/RajatPatelDev/your-repository" }
 ];
 
+// PROJECT RENDERING: Builds the project cards from the projects array above.
 const projectGrid = document.querySelector("#project-grid");
 const projectEmpty = document.querySelector("#project-empty");
 
@@ -19,7 +21,9 @@ if (projects.length && projectGrid && projectEmpty) {
   `).join("");
 }
 
+// FOOTER YEAR: Keeps the copyright year current automatically.
 document.querySelector("#year").textContent = new Date().getFullYear();
+// MOBILE NAVIGATION: Opens and closes the menu on smaller screens.
 const menuToggle = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 menuToggle?.addEventListener("click", () => {
