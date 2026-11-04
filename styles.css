@@ -583,3 +583,50 @@ body:not([data-theme="dark"]) .nav .lamp-halo{opacity:0!important}
 body[data-theme="dark"] .site-header>.theme-pull .lamp-shade{fill:#e7d49a;stroke:#c7a45b;filter:drop-shadow(0 0 5px rgba(255,202,99,.45))}
 body[data-theme="dark"] .site-header>.theme-pull .lamp-glow{fill:#ffe18b;stroke:#e4b84e;filter:drop-shadow(0 0 7px rgba(255,204,91,.85))}
 body[data-theme="dark"] .site-header>.theme-pull .lamp-halo{opacity:1;background:rgba(255,196,75,.62);animation:night-lamp-pulse 2.8s ease-in-out infinite}
+
+
+/* FINAL LAMP FINISH: APPLY THE PENDANT DETAILS AFTER MOVING IT OUTSIDE THE NAV */
+.site-header>.theme-pull .lamp-housing{
+  position:absolute!important;
+  width:26px!important;height:31px!important;
+  transform-origin:50% 0!important;
+  animation:pendant-dangle 4.2s ease-in-out infinite!important;
+}
+.site-header>.theme-pull .lamp-icon{
+  width:26px!important;height:26px!important;
+  filter:none!important;animation:none!important
+}
+.site-header>.theme-pull .lamp-shade{
+  fill:#b8c9cc;stroke:#718b90;stroke-width:1.7;stroke-linejoin:round;
+  filter:none;transition:fill .3s ease,stroke .3s ease,filter .3s ease
+}
+.site-header>.theme-pull .lamp-glow{
+  fill:#91a6a9;stroke:#718b90;stroke-width:1.2;
+  filter:none;transition:fill .3s ease,stroke .3s ease,filter .3s ease
+}
+.site-header>.theme-pull .lamp-stem,
+.site-header>.theme-pull .lamp-base{
+  fill:none;stroke:#718b90;stroke-width:1.8;stroke-linecap:round
+}
+.site-header>.theme-pull .lamp-halo{
+  position:absolute;width:25px;height:22px;left:1px;top:9px;
+  border-radius:50%;background:transparent;filter:blur(7px);opacity:0;
+  transition:opacity .35s ease,background .35s ease;animation:none
+}
+body:not([data-theme="dark"]) .site-header>.theme-pull .lamp-halo{opacity:0!important}
+body[data-theme="dark"] .site-header>.theme-pull .lamp-shade{
+  fill:#e7d49a;stroke:#c7a45b;filter:drop-shadow(0 0 5px rgba(255,202,99,.45))
+}
+body[data-theme="dark"] .site-header>.theme-pull .lamp-glow{
+  fill:#ffe18b;stroke:#e4b84e;filter:drop-shadow(0 0 7px rgba(255,204,91,.85))
+}
+body[data-theme="dark"] .site-header>.theme-pull .lamp-stem,
+body[data-theme="dark"] .site-header>.theme-pull .lamp-base{stroke:#a98b53}
+body[data-theme="dark"] .site-header>.theme-pull .lamp-halo{
+  opacity:1;background:rgba(255,196,75,.62);
+  animation:night-lamp-pulse 2.8s ease-in-out infinite
+}
+@media(prefers-reduced-motion:reduce){
+  .site-header>.theme-pull .lamp-housing{animation:none!important}
+  body[data-theme="dark"] .site-header>.theme-pull .lamp-halo{animation:none!important}
+}
