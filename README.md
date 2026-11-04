@@ -1,6 +1,6 @@
 # Rajat Patel — Personal Portfolio
 
-A responsive, dark-themed personal portfolio hosted with GitHub Pages.
+A responsive personal portfolio with light and dark themes, hosted with GitHub Pages.
 
 ## Live site
 
