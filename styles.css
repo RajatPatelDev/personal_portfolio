@@ -219,3 +219,70 @@ body,.site-header,.about-section,.focus-section,.experience-section,.projects-se
 @media(prefers-reduced-motion:reduce){
   .theme-pull *{transition:none!important}
 }
+
+
+/* HEADER-PINNED THEME CONTROL: THE LAMP NOW TRAVELS WITH THE STICKY HEADER */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(247,249,250,.91);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  padding-right:100px;
+  transition:background .35s ease,border-color .35s ease,box-shadow .35s ease;
+}
+.theme-pull{
+  position:absolute;
+  top:5px;
+  right:0;
+  width:86px;
+  height:120px;
+  z-index:55;
+  transform:none;
+  pointer-events:none;
+}
+.lamp-housing{animation:lamp-sway 4.8s ease-in-out infinite;transform-origin:50% 0}
+.lamp-icon{animation:lamp-breathe 3.2s ease-in-out infinite}
+.lamp-halo{animation:halo-pulse 3.2s ease-in-out infinite}
+.pull-strings{height:62px}
+.pull-dark{left:12px}
+.pull-light{right:12px}
+.string-line{height:38px}
+.string-knob{top:35px}
+.string-caption{top:49px}
+.theme-status{top:108px;right:2px;font-size:6px}
+@keyframes lamp-sway{
+  0%,100%{transform:rotate(-2deg)}
+  50%{transform:rotate(2deg)}
+}
+@keyframes lamp-breathe{
+  0%,100%{filter:drop-shadow(0 3px 6px rgba(8,127,120,.14))}
+  50%{filter:drop-shadow(0 4px 12px rgba(255,194,67,.34))}
+}
+@keyframes halo-pulse{
+  0%,100%{opacity:.55;transform:scale(.9)}
+  50%{opacity:1;transform:scale(1.14)}
+}
+.theme-pull.is-night .lamp-icon{animation:lamp-sway 4.8s ease-in-out infinite,lamp-night-glint 2.4s ease-in-out infinite}
+@keyframes lamp-night-glint{
+  0%,100%{filter:drop-shadow(0 3px 6px rgba(95,157,235,.18))}
+  50%{filter:drop-shadow(0 4px 13px rgba(95,157,235,.42))}
+}
+body[data-theme="dark"] .site-header{
+  background:rgba(13,20,27,.91);
+  border-color:var(--line);
+  box-shadow:0 8px 24px rgba(0,0,0,.12)
+}
+@media(max-width:900px){
+  .site-header{padding-right:94px}
+}
+@media(max-width:650px){
+  .site-header{padding-right:82px}
+  .theme-pull{top:3px;right:42px;transform:scale(.72);transform-origin:top right}
+  .theme-status{top:108px}
+  .nav{z-index:2}
+}
+@media(prefers-reduced-motion:reduce){
+  .lamp-housing,.lamp-icon,.lamp-halo{animation:none!important}
+}
