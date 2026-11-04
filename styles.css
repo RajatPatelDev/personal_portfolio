@@ -630,3 +630,157 @@ body[data-theme="dark"] .site-header>.theme-pull .lamp-halo{
   .site-header>.theme-pull .lamp-housing{animation:none!important}
   body[data-theme="dark"] .site-header>.theme-pull .lamp-halo{animation:none!important}
 }
+
+
+/* FINAL THEME LAMP: CLICK TO TOGGLE, NO STRINGS, ALWAYS DANGLING */
+.nav>.theme-pull{
+  appearance:none;
+  -webkit-appearance:none;
+  display:block!important;
+  position:relative!important;
+  flex:0 0 30px!important;
+  width:30px!important;
+  height:48px!important;
+  min-width:30px;
+  margin:0 -10px 0 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  cursor:pointer;
+  pointer-events:auto!important;
+  z-index:4;
+  overflow:visible;
+}
+.nav>.theme-pull:focus-visible{
+  outline:2px solid var(--accent);
+  outline-offset:4px;
+  border-radius:4px;
+}
+.nav>.theme-pull .lamp-housing{
+  position:absolute!important;
+  left:2px!important;
+  top:4px!important;
+  width:26px!important;
+  height:31px!important;
+  display:grid;
+  place-items:center;
+  transform-origin:50% 0!important;
+  animation:pendant-dangle 4.2s ease-in-out infinite!important;
+}
+.nav>.theme-pull .lamp-housing:before{
+  content:"";
+  position:absolute;
+  width:1px;
+  height:13px;
+  left:50%;
+  bottom:100%;
+  transform:translateX(-50%);
+  background:linear-gradient(to top,rgba(106,137,145,.85),rgba(106,137,145,.18));
+}
+.nav>.theme-pull .lamp-icon{
+  display:block;
+  width:26px!important;
+  height:26px!important;
+  overflow:visible;
+  filter:none!important;
+  animation:none!important;
+}
+.nav>.theme-pull .lamp-shade{
+  fill:#bdccce!important;
+  stroke:#718b90!important;
+  stroke-width:1.7;
+  stroke-linejoin:round;
+  filter:none!important;
+  transition:fill .3s ease,stroke .3s ease,filter .3s ease;
+}
+.nav>.theme-pull .lamp-glow{
+  fill:#91a6a9!important;
+  stroke:#718b90!important;
+  stroke-width:1.2;
+  filter:none!important;
+  transition:fill .3s ease,stroke .3s ease,filter .3s ease;
+}
+.nav>.theme-pull .lamp-stem,
+.nav>.theme-pull .lamp-base{
+  fill:none;
+  stroke:#718b90;
+  stroke-width:1.8;
+  stroke-linecap:round;
+}
+.nav>.theme-pull .lamp-halo{
+  position:absolute;
+  width:26px;
+  height:23px;
+  left:0;
+  top:8px;
+  border-radius:50%;
+  background:rgba(255,196,75,.65);
+  filter:blur(8px);
+  opacity:0!important;
+  transition:opacity .35s ease;
+  animation:none;
+  pointer-events:none;
+}
+
+/* DAY: visibly switched off */
+body:not([data-theme="dark"]) .nav>.theme-pull .lamp-shade{
+  fill:#bdccce!important;
+  stroke:#718b90!important;
+  filter:none!important;
+}
+body:not([data-theme="dark"]) .nav>.theme-pull .lamp-glow{
+  fill:#91a6a9!important;
+  stroke:#718b90!important;
+  filter:none!important;
+}
+body:not([data-theme="dark"]) .nav>.theme-pull .lamp-halo{opacity:0!important}
+
+/* NIGHT: warm bulb and a soft golden pool of light */
+body[data-theme="dark"] .nav>.theme-pull .lamp-shade{
+  fill:#f0d89b!important;
+  stroke:#c39a4e!important;
+  filter:drop-shadow(0 0 4px rgba(255,205,112,.4))!important;
+}
+body[data-theme="dark"] .nav>.theme-pull .lamp-glow{
+  fill:#ffe18b!important;
+  stroke:#e4b84e!important;
+  filter:drop-shadow(0 0 8px rgba(255,204,91,.95))!important;
+}
+body[data-theme="dark"] .nav>.theme-pull .lamp-stem,
+body[data-theme="dark"] .nav>.theme-pull .lamp-base{stroke:#b49456}
+body[data-theme="dark"] .nav>.theme-pull .lamp-halo{
+  opacity:.9!important;
+  animation:night-lamp-pulse 2.8s ease-in-out infinite;
+}
+.nav>.theme-pull.is-clicked .lamp-housing{
+  animation:lamp-click-swing .42s ease-out!important;
+}
+@keyframes lamp-click-swing{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(11deg)}
+  55%{transform:rotate(-8deg)}
+  80%{transform:rotate(4deg)}
+  100%{transform:rotate(0)}
+}
+@media(max-width:900px) and (min-width:651px){
+  .nav{gap:22px}
+  .nav>.theme-pull{margin-right:-7px!important}
+}
+@media(max-width:650px){
+  .site-header{position:relative!important}
+  .nav>.theme-pull{
+    position:absolute!important;
+    top:10px!important;
+    right:62px!important;
+    width:30px!important;
+    height:44px!important;
+    margin:0!important;
+  }
+  .nav>.theme-pull .lamp-housing{left:2px!important;top:4px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav>.theme-pull .lamp-housing{animation:none!important}
+  body[data-theme="dark"] .nav>.theme-pull .lamp-halo{animation:none!important}
+}
