@@ -34,3 +34,60 @@ nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () =
   nav.classList.remove("open");
   menuToggle?.setAttribute("aria-expanded", "false");
 }));
+
+// THEME SWITCHER: Pull either hanging string to switch between day and night themes.
+const themeSwitch = document.querySelector(".theme-pull");
+const themeButtons = document.querySelectorAll("[data-theme-choice]");
+const themeStatus = document.querySelector(".theme-status");
+const themeColorMeta = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  const selectedTheme = theme === "dark" ? "dark" : "light";
+  document.body.dataset.theme = selectedTheme;
+
+  if (themeSwitch) {
+    themeSwitch.classList.toggle("is-night", selectedTheme === "dark");
+  }
+
+  if (themeStatus) {
+    themeStatus.textContent = selectedTheme === "dark" ? "NIGHT MODE" : "DAY MODE";
+  }
+
+  themeButtons.forEach((button) => {
+    button.setAttribute("aria-pressed", String(button.dataset.themeChoice === selectedTheme));
+  });
+
+  if (themeColorMeta) {
+    themeColorMeta.setAttribute("content", selectedTheme === "dark" ? "#0d141b" : "#f7f9fa");
+  }
+
+  try {
+    localStorage.setItem("rajat-portfolio-theme", selectedTheme);
+  } catch (error) {
+    // Theme still works for this visit if browser storage is unavailable.
+  }
+}
+
+// Restore the visitor's last choice; the portfolio starts in day mode by default.
+let savedTheme = "light";
+try {
+  savedTheme = localStorage.getItem("rajat-portfolio-theme") || "light";
+} catch (error) {
+  savedTheme = "light";
+}
+applyTheme(savedTheme);
+
+// Pull animation runs before applying the selected appearance.
+themeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const requestedTheme = button.dataset.themeChoice;
+    button.classList.remove("is-pulling");
+    void button.offsetWidth;
+    button.classList.add("is-pulling");
+
+    window.setTimeout(() => {
+      applyTheme(requestedTheme);
+      button.classList.remove("is-pulling");
+    }, 180);
+  });
+});
