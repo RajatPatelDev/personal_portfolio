@@ -35,40 +35,31 @@ nav?.querySelectorAll("a").forEach((link) => link.addEventListener("click", () =
   menuToggle?.setAttribute("aria-expanded", "false");
 }));
 
-// THEME SWITCHER: Pull either hanging string to switch between day and night themes.
-const themeSwitch = document.querySelector(".theme-pull");
-const themeButtons = document.querySelectorAll("[data-theme-choice]");
-const themeStatus = document.querySelector(".theme-status");
+// THEME SWITCHER: Click the hanging lamp to toggle between day and night.
+const themeLamp = document.querySelector(".theme-pull");
 const themeColorMeta = document.querySelector('meta[name="theme-color"]');
 
 function applyTheme(theme) {
   const selectedTheme = theme === "dark" ? "dark" : "light";
   document.body.dataset.theme = selectedTheme;
 
-  if (themeSwitch) {
-    themeSwitch.classList.toggle("is-night", selectedTheme === "dark");
+  if (themeLamp) {
+    const nightMode = selectedTheme === "dark";
+    themeLamp.setAttribute("aria-pressed", String(nightMode));
+    themeLamp.setAttribute("aria-label", nightMode ? "Switch to day mode" : "Switch to night mode");
+    themeLamp.setAttribute("title", nightMode ? "Switch to day mode" : "Switch to night mode");
   }
 
-  if (themeStatus) {
-    themeStatus.textContent = selectedTheme === "dark" ? "NIGHT MODE" : "DAY MODE";
-  }
-
-  themeButtons.forEach((button) => {
-    button.setAttribute("aria-pressed", String(button.dataset.themeChoice === selectedTheme));
-  });
-
-  if (themeColorMeta) {
-    themeColorMeta.setAttribute("content", selectedTheme === "dark" ? "#0d141b" : "#f7f9fa");
-  }
+  themeColorMeta?.setAttribute("content", selectedTheme === "dark" ? "#0d141b" : "#f7f9fa");
 
   try {
     localStorage.setItem("rajat-portfolio-theme", selectedTheme);
   } catch (error) {
-    // Theme still works for this visit if browser storage is unavailable.
+    // Theme switching still works for this visit if storage is unavailable.
   }
 }
 
-// Restore the visitor's last choice; the portfolio starts in day mode by default.
+// Restore the saved choice. New visitors start in day mode.
 let savedTheme = "light";
 try {
   savedTheme = localStorage.getItem("rajat-portfolio-theme") || "light";
@@ -77,17 +68,12 @@ try {
 }
 applyTheme(savedTheme);
 
-// Pull animation runs before applying the selected appearance.
-themeButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const requestedTheme = button.dataset.themeChoice;
-    button.classList.remove("is-pulling");
-    void button.offsetWidth;
-    button.classList.add("is-pulling");
-
-    window.setTimeout(() => {
-      applyTheme(requestedTheme);
-      button.classList.remove("is-pulling");
-    }, 180);
-  });
+// The lamp gently swings continuously; clicking it toggles the page theme.
+themeLamp?.addEventListener("click", () => {
+  const nextTheme = document.body.dataset.theme === "dark" ? "light" : "dark";
+  themeLamp.classList.remove("is-clicked");
+  void themeLamp.offsetWidth;
+  themeLamp.classList.add("is-clicked");
+  applyTheme(nextTheme);
+  window.setTimeout(() => themeLamp.classList.remove("is-clicked"), 420);
 });
